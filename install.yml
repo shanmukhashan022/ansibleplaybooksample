@@ -11,10 +11,9 @@
     - name: Insert Index Page
       template:
         src: index.html
-        dest: /usr/share/nginx/html/index.html
+        dest: /var/www/html/index.html
         mode: 0644
 
   handlers:
     - name: start nginx
       service: name=nginx state=started
-
