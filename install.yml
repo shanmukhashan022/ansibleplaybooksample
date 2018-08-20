@@ -1,24 +1,20 @@
+
 - name: Install nginx
-  hosts: host.name.ip
+  hosts: domainsecurity
   become: true
 
   tasks:
-  - name: Add epel-release repo
-    yum:
-      name: epel-release
-      state: present
+    - name: Installs nginx web server
+      apt: pkg=nginx state=present update_cache=true
+      notify:
+        - start nginx
+    - name: Insert Index Page
+      template:
+        src: index.html
+        dest: /usr/share/nginx/html/index.html
+        mode: 0644
 
-  - name: Install nginx
-    yum:
-      name: nginx
-      state: present
+  handlers:
+    - name: start nginx
+      service: name=nginx state=started
 
-  - name: Insert Index Page
-    template:
-      src: index.html
-      dest: /usr/share/nginx/html/index.html
-
-  - name: Start NGiNX
-    service:
-      name: nginx
-      state: started
