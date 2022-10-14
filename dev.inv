@@ -1,2 +1,2 @@
 [webservers]
-3.110.212.115
+3.110.212.115 ansible_pass=ubuntu ansible_user=ubuntu
